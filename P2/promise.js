@@ -7,8 +7,9 @@ function download() {
 }
 
 function verify() {
-  return new Promise((resolve,reject) => {
-    setTimeout (() => {
+  1;
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
       resolve("Verify selama 2 detik");
     }, 2000);
   });
