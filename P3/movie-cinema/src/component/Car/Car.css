@@ -1,0 +1,35 @@
+.cards {
+  border: 1px solid grey;
+  width: 250px;
+  background-color: #ffffffc6;
+  border-radius: 15px;
+  margin: 10px;
+  transition: .3s ease;
+}
+
+.cards:hover {
+  box-shadow: 1px 2px 3px gray;
+}
+
+.cards img {
+  border-top-left-radius:15px ;
+  border-top-right-radius: 15px;
+  width: 100%;
+}
+
+.cards button {
+  display: block;
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 5px;
+}
+
+.cards div {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.cards div p {
+  font-size:;
+}
