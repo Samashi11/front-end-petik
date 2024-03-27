@@ -1,0 +1,22 @@
+.movies-container {
+  display: grid;
+  grid-template-columns:1fr;
+  gap: 16px;
+  justify-content: center;
+}
+
+/* Medium Screen */
+@media screen and (min-width: 768px){
+  .movies-container {
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: start;
+  }
+}
+
+/* Large Screen */
+@media screen and (min-width: 992px){
+  .movies-container {
+    grid-template-columns: repeat(5, 1fr);
+    justify-content: start;
+  }
+}

@@ -1,7 +1,7 @@
 import "./User.css";
 
 const User = (props) => {
-  const { nama, member, message, subscribe } = props;
+  const { nama, member, message, subscribe, id } = props;
   const tableStyle = {
     border: "1px solid black",
     width: "300px",
@@ -23,6 +23,7 @@ const User = (props) => {
         <tbody className="card-body">
           <tr>
             <td colSpan={2}>{member}</td>
+            {/* <p>{id}</p> */}
           </tr>
           <tr>
             <td>
