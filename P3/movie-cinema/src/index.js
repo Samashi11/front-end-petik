@@ -10,3 +10,5 @@ root.render(
     <App />
   </React.StrictMode>
 );
+
+// jika ingin menampilkan satu console log hapus reacr.strictnya

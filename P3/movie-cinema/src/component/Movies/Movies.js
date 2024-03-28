@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Movie from "../Movie/Movie.js";
+import AddMovieForm from "../AddMovieForm/AddMovieForm.js";
 import "./Movies.css";
 
 const Movies = () => {
-  const datas = [
+  const [nama, setNama] = useState("Ucup");
+
+  // setNama("Budi");
+  // console.log(nama);
+
+  const [datas, setDatas] = useState([
     {
       poster:
         "https://upload.wikimedia.org/wikipedia/id/2/2f/Boboiboy_The_Movies.jpg",
@@ -68,12 +74,31 @@ const Movies = () => {
       genre: "Animation, Comedy, Adventure",
     },
     {
-      poster:"https://m.media-amazon.com/images/I/81QchPvsz0L._AC_UF894,1000_QL80_.jpg",
+      poster:
+        "https://m.media-amazon.com/images/I/81QchPvsz0L._AC_UF894,1000_QL80_.jpg",
       title: "Puss In Boots",
       year: "2016",
       genre: "Action, Animation, Comedy, Adventure",
-    }
-  ];
+    },
+  ]);
+
+  const handleClick = () => {
+    const movie = {
+      poster:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQeC2VEirfVuW_rglNwGcjhQ3cCniQD4_cqdQ&usqp=CAU",
+      title: "Amazing spiderman",
+      year: 2012,
+      genre: "Action, Adventure",
+    };
+    setDatas("Budi");
+  };
+
+  const addMovie = (movie) => {
+    setDatas([...datas,movie]);
+  }
+
+  console.log(datas);
+
   return (
     <div>
       <h2>Latest Movies</h2>
@@ -88,7 +113,11 @@ const Movies = () => {
             />
           );
         })}
+        {/* <p>{nama}</p>
+        <button onClick={handleClick}>Add Movie</button> */}
       </div>
+      <AddMovieForm onAddMovie={addMovie}/>
+
     </div>
   );
 };

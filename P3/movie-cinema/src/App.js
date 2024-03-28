@@ -7,9 +7,13 @@ import Car from "./component/Car/Car.js";
 import Main from "./component/Main/Main.js";
 import Movies from "./component/Movies/Movies.js";
 import Footer from "./component/Footer/Footer.js";
+import AddMovieForm from "./component/AddMovieForm/AddMovieForm.js";
 import imgProfile from "./component/man.png";
 
 function App() {
+
+  
+
   return (
     <div >
       <Navbar />
