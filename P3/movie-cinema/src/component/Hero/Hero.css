@@ -1,6 +1,6 @@
 /* Small Screen */
 .container {
-
+  width: 100%;
 }
 
 .hero {
@@ -20,12 +20,14 @@
 }
 
 .hero-title {
+  text-align: start;
   color: #4361ee;
   margin-bottom: 1rem;
   font-size: 2rem;
 }
 
 .hero-description {
+  text-align: start;
   color: #4361ee;
   margin-bottom: 1rem;
 }
