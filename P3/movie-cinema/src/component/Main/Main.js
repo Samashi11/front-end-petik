@@ -49,7 +49,6 @@ const Main = () => {
   ];
   return (
     <>
-      <div></div>
       <div className="content">
         {/* <Car
           gambar="https://cdn0-production-images-kly.akamaized.net/FzEkirLZctw0ZIlj7Ap5q87i9I4=/1200x675/smart/filters:quality(75):strip_icc():format(webp)/kly-media-production/medias/4311406/original/072797400_1675327200-liputan6-bugatti-chiron-profilee-01.jpg"
