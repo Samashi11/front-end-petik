@@ -5,11 +5,13 @@ const Footer = () => {
   return (
     <div>
       <footer>
-        <h3>Copyright &copy; 2024 Developed By Shidqi Maula</h3>
-        <span>Make With &#10084; & &#128218;</span>
+        <div class="content has-text-centered has-background-primary-dark">
+          <h3>Copyright &copy; 2024 Developed By Shidqi Maula</h3>
+          <p>Make With &#10084; & &#128218;</p>
+        </div>
       </footer>
     </div>
-  )
+  );
 }
 
 export default Footer

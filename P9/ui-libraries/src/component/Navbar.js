@@ -37,15 +37,19 @@ function NavbarComponent(args) {
             <NavLink className="text-light mx-2 text-decoration-none" to="/">
               Home
             </NavLink>
-            <NavLink className="text-light mx-2 text-decoration-none" to="/dashboard">
-              Dashboard
-            </NavLink>
             <NavLink
               className="text-light mx-2 text-decoration-none"
-              to="/top"
-            >Top Rated</NavLink>
+              to="/dashboard"
+            >
+              Dashboard
+            </NavLink>
+            <NavLink className="text-light mx-2 text-decoration-none" to="/top">
+              Top Rated
+            </NavLink>
           </Nav>
-          <NavbarText>Kisanak!</NavbarText>
+          <NavLink to={"/login"}>
+            <button className="button is-light">Login</button>
+          </NavLink>
         </Collapse>
       </Navbar>
     </div>

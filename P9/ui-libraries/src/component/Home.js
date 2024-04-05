@@ -1,6 +1,6 @@
 import React from "react";
 import Hero from "./Hero";
-import Movies from "./Movies";
+import Products from "./Products";
 import NavbarComponent from "./Navbar";
 import Footer from "./Footer";
 
@@ -9,7 +9,7 @@ const Home = () => {
     <div>
       <NavbarComponent/>
       <Hero />
-      <Movies />
+      <Products />
       <Footer/>
     </div>
   );

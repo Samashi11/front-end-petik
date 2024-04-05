@@ -6,8 +6,8 @@ const Hero = () => {
     <Container className="my-5">
       <Row>
         <Col md={8} className="text-md-right">
-          <h2 className="text-primary">Title</h2>
-          <h3 className="text-primary">Genre :</h3>
+          <strong className="text-primary">Title</strong>
+          <strong className="text-primary is-block">Genre :</strong>
           <p>
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates
             architecto perferendis, consequatur ad quas autem, magnam enim vel

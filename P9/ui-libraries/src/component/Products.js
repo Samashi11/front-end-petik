@@ -9,27 +9,27 @@ import {
   Row,
 } from "reactstrap";
 
-const Movies = () => {
-  const movies = [
+const Products = () => {
+  const products = [
     {
-      title: "Movie1",
-      year: "2021",
+      title: "Product 1",
+      price: "14000",
     },
     {
-      title: "Movie2",
-      year: "2023",
+      title: "Product 2",
+      price: "1540000",
     },
     {
-      title: "Movie3",
-      year: "2019",
+      title: "Product 3",
+      price: "27000",
     },
     {
-      title: "Movie4",
-      year: "2014",
+      title: "Product 4",
+      price: "428000",
     },
     {
-      title: "Movie5",
-      year: "2023",
+      title: "Product 5",
+      price: "98000",
     },
   ];
 
@@ -37,9 +37,9 @@ const Movies = () => {
     <div>
       <Container>
         <Row>
-          {movies.map((movie) => {
+          {products.map((product, index) => {
             return (
-              <Col className="mb-xs-3">
+              <Col sm={6} md={4} lg={3} key={index} className="mb-4">
                 <Card
                   className="mb-md-4"
                   color="light"
@@ -48,9 +48,9 @@ const Movies = () => {
                   }}
                 >
                   <img alt="Sample" src="https://picsum.photos/300/200" />
-                  <CardBody className="text-center">
-                    <CardTitle tag="h5">{movie.title}</CardTitle>
-                    <CardText>{movie.year}</CardText>
+                  <CardBody className="text-center has-text-dark">
+                    <CardTitle tag="h5">{product.title}</CardTitle>
+                    <CardText>{product.price}</CardText>
                   </CardBody>
                 </Card>
               </Col>
@@ -62,4 +62,4 @@ const Movies = () => {
   );
 };
 
-export default Movies;
+export default Products;
