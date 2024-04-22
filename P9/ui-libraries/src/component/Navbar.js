@@ -43,8 +43,11 @@ function NavbarComponent(args) {
             >
               Dashboard
             </NavLink>
-            <NavLink className="text-light mx-2 text-decoration-none" to="/top">
-              Top Rated
+            <NavLink
+              className="text-light mx-2 text-decoration-none"
+              to="/courses"
+            >
+              Courses
             </NavLink>
           </Nav>
           <NavLink to={"/login"}>
