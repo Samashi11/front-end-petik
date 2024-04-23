@@ -49,6 +49,12 @@ function NavbarComponent(args) {
             >
               Courses
             </NavLink>
+            <NavLink
+              className="text-light mx-2 text-decoration-none"
+              to="/trainers"
+            >
+              Trainers
+            </NavLink>
           </Nav>
           <NavLink to={"/login"}>
             <button className="button is-light">Login</button>
