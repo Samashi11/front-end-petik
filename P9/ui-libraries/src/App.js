@@ -11,6 +11,9 @@ import Detail from "./pages/Detail.js";
 import Layout from "./component/Layout.js";
 import Dashboard from "./pages/Dashboard.js";
 import DetailCourse from "./component/DetailCourse.js";
+import DetailCoursePage from "./pages/DetailCoursePage.js";
+import AddCourse from "./component/course/AddCourse.js";
+import TableCourse from "./component/course/TableCourse.js";
 
 function App() {
   return (
@@ -23,8 +26,12 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           {/* <Route path="/detail" element={<Detail />} /> */}
-          <Route path="/course/:id" element={<Detail />} />
+          <Route path="/course/:id" element={<DetailCoursePage />} />
+          <Route path="/course/add" element={<AddCourse />} />
           <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/table-course" element={<TableCourse />} />
+          <Route path="/trainer-course" element={<TableCourse />} />
+          <Route path="/*" element={<TableCourse />} />
         </Routes>
         {/* <Footer /> */}
       </BrowserRouter>

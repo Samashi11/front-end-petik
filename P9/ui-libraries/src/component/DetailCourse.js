@@ -3,18 +3,32 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 
 const DetailCourse = () => {
-  const [courses, setCourses] = useState([]);
+  // const [courses, setCourses] = useState([]);
+  const [name, setName] = useState("");
+  const [desc, setDesc] = useState("");
+  const [url, setUrl] = useState("");
 
   let { id } = useParams();
 
+  // useEffect(() => {
+  //   getCourses();
+  // });
+
   useEffect(() => {
-    getCourses();
+    getCourseById(id);
   });
 
-  const getCourses = async () => {
+  const getCourseById = async (id) => {
     const response = await axios.get(`https://api.sukmax.my.id/course/${id}`);
-    setCourses(response.data);
-  };
+    setName(response.data.name);
+    setDesc(response.data.desc);
+    setUrl(response.data.url);
+  }
+
+  // const getCourses = async () => {
+  //   const response = await axios.get(`https://api.sukmax.my.id/course/${id}`);
+  //   setCourses(response.data);
+  // };
 
   return (
     <section className="section mt-5">
@@ -22,14 +36,14 @@ const DetailCourse = () => {
         <div class="columns">
           <div class="column is-half">
             <figure className="image is4by3">
-              <img src={courses.url} alt="" />
+              <img src={url} alt="" />
             </figure>
           </div>
           <div class="column">
             <div class="content">
-              <div class="is-title is-4">{courses.name}</div>
+              <div class="is-title is-4">{name}</div>
               <p>
-                {courses.desc}
+                {desc}
               </p>
               <div class="field p-5">
                 <button className="button is-primary is-fullwidth has-text-white mb-3">
