@@ -8,20 +8,21 @@ const EditCourse = () => {
   const [trainerId, setTrainerId] = useState(1);
   const [desc, setDesc] = useState("");
   const [file, setFile] = useState("");
+  const [image, setImage] = useState("");
   const [preview, setPreview] = useState("");
   const navigate = useNavigate();
-
-  let { id } = useParams();
-
+  const { id } = useParams();
+  
   const loadImage = (e) => {
     const image = e.target.files[0];
-    setFile(image);
-    setPreview(URL.createObjectURL(image));
+    setImage(image);
+    setFile(URL.createObjectURL(image));
   };
 
   const getCourseById = async () => {
-    const response = await axios.get(`https://api.sukmax.my.id/course/${id}`);
+    const response = await axios.get(`https://api.sukmax.my.id/trainer/${id}`);
     setName(response.data.name);
+    setTrainerId(response.data.trainer_id);
     setDesc(response.data.desc);
     setFile(response.data.url);
   };
@@ -31,24 +32,25 @@ const EditCourse = () => {
   },[]);
 
   const updateCourse = async (e) => {
-    // e.preventDefault();
-    // try {
-    //   await axios.post("https://api.sukmax.my.id/course", {
-    //     name: name,
-    //     trainer_id: trainerId,
-    //     desc: desc,
-    //     file: file,
-    //   }, {
-    //     headers : {
-    //       "Content-Type" : "multipart/form-data",
-    //     }
-    //   }
-    // );
-    // // redirect
-    // navigate("/table-course")
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    e.preventDefault();
+    try {
+      await axios.put(`https://api.sukmax.my.id/trainer/${id}`, {
+        name: name,
+        trainer_id: trainerId,
+        desc: desc,
+        file: file,
+        image : image,
+      }, {
+        headers : {
+          "Content-Type" : "multipart/form-data",
+        }
+      }
+    );
+    // redirect
+    navigate("/table-course")
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -73,7 +75,7 @@ const EditCourse = () => {
 
         <div class="field">
           <label class="label" className="is-black is-bold">
-            Trainer Id
+            Address
           </label>
           <div class="control">
             <input
@@ -88,7 +90,7 @@ const EditCourse = () => {
 
         <div class="field">
           <label class="label" className="is-black is-bold">
-            Description
+            Skill
           </label>
           <div class="control">
             <textarea
@@ -118,7 +120,7 @@ const EditCourse = () => {
           </label>
         </div>
 
-        {preview ? (
+        {file ? (
           <figure className="image is-128x128">
             <img src={file} alt=""/>
           </figure>
