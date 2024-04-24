@@ -1,30 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../Layout";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-const AddCourse = () => {
+const EditTrainer = () => {
   const [name, setName] = useState("");
-  const [trainerId, setTrainerId] = useState(1);
-  const [desc, setDesc] = useState("");
+  const [address, setAddress] = useState("");
+  const [skill, setSkill] = useState("");
   const [file, setFile] = useState("");
+  const [image, setImage] = useState("");
   const [preview, setPreview] = useState("");
   const navigate = useNavigate();
-
+  const { id } = useParams();
+  
   const loadImage = (e) => {
     const image = e.target.files[0];
-    setFile(image);
-    setPreview(URL.createObjectURL(image));
+    setImage(image);
+    setFile(URL.createObjectURL(image));
   };
 
-  const saveCourse = async (e) => {
+  const getTrainerById = async () => {
+    const response = await axios.get(`https://api.sukmax.my.id/trainer/${id}`);
+    setName(response.data.name);
+    setAddress(response.data.address);
+    setSkill(response.data.skill);
+    setFile(response.data.url);
+  };
+
+  useEffect(() => {
+    getTrainerById();
+  },[]);
+
+  const updateTrainer = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("https://api.sukmax.my.id/course", {
+      await axios.put(`https://api.sukmax.my.id/trainer/${id}`, {
         name: name,
-        trainer_id: trainerId,
-        desc: desc,
+        address: address,
+        skill: skill,
         file: file,
+        image : image,
       }, {
         headers : {
           "Content-Type" : "multipart/form-data",
@@ -32,7 +47,7 @@ const AddCourse = () => {
       }
     );
     // redirect
-    navigate("/table-course")
+    navigate("/table-trainer")
     } catch (error) {
       console.log(error);
     }
@@ -40,9 +55,9 @@ const AddCourse = () => {
 
   return (
     <Layout>
-      <h2 className="title is-black">Course</h2>
-      <h3 className="subtitle">Add New Course</h3>
-      <form onSubmit={saveCourse}>
+      <h2 className="title is-black">Trainer</h2>
+      <h3 className="subtitle">Update Trainer</h3>
+      <form onSubmit={updateTrainer}>
         <div class="field">
           <label class="label is-dark" className="is-black is-bold">
             Name
@@ -51,6 +66,7 @@ const AddCourse = () => {
             <input
               class="input"
               type="text"
+              value={name}
               placeholder="Masukkan Nama Course"
               onChange={(e) => setName(e.target.value)}
             />
@@ -59,28 +75,30 @@ const AddCourse = () => {
 
         <div class="field">
           <label class="label" className="is-black is-bold">
-            Trainer Id
+            Address
           </label>
           <div class="control">
             <input
               class="input"
               type="text"
+              value={address}
               placeholder="Text input"
-              onChange={(e) => setTrainerId(e.target.value)}
+              onChange={(e) => setAddress(e.target.value)}
             />
           </div>
         </div>
 
         <div class="field">
           <label class="label" className="is-black is-bold">
-            Description
+            Skill
           </label>
           <div class="control">
             <textarea
               class="input"
               type="text"
+              value={skill}
               placeholder="Text input"
-              onChange={(e) => setDesc(e.target.value)}
+              onChange={(e) => setSkill(e.target.value)}
             ></textarea>
           </div>
         </div>
@@ -102,9 +120,9 @@ const AddCourse = () => {
           </label>
         </div>
 
-        {preview ? (
+        {file ? (
           <figure className="image is-128x128">
-            <img src={preview} alt=""/>
+            <img src={file} alt=""/>
           </figure>
         ) : (
           ""
@@ -115,10 +133,9 @@ const AddCourse = () => {
             <button type="submit" class="button is-link">Submit</button>
           </div>
           <div class="control">
-            <Link to={"/table-course"} className="button is-link is-light">
+          <Link to={"/table-trainer"} className="button is-link is-light">
             Cancel
             </Link>
-            {/* <button class="button is-link is-light"></button> */}
           </div>
         </div>
       </form>
@@ -126,4 +143,4 @@ const AddCourse = () => {
   );
 }
 
-export default AddCourse;
+export default EditTrainer;

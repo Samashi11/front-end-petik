@@ -16,6 +16,14 @@ const TableTrainer = () => {
     const response = await axios.get("https://api.sukmax.my.id/trainer");
     setTrainer(response.data);
   };
+
+  const deleteTrainer = async (id) => {
+    try {
+      await axios.delete(`https://api.sukmax.my.id/trainer/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <Layout>
       <h2 className="title is-primary">Trainer</h2>
@@ -31,6 +39,7 @@ const TableTrainer = () => {
             <th>Address</th>
             <th>Skill</th>
             <th>Image</th>
+            <th></th>
           </tr>
         </thead>
         <tbody>
@@ -42,7 +51,27 @@ const TableTrainer = () => {
                 <td>{trainer.address}</td>
                 <td>{trainer.skill}</td>
                 <td className="image is-128x128">
-                  <img src={trainer.url} alt=""/>
+                  <img src={trainer.url} alt="" />
+                </td>
+                <td>
+                  <Link
+                    to={`/trainer/edit/${trainer.id}`}
+                    className="button is-small is-primary my-2"
+                  >
+                    Edit
+                  </Link>
+                  <button
+                    onClick={() => {
+                      if (
+                        window.confirm("apakah anda yakin ingin menghapus?")
+                      ) {
+                        deleteTrainer(trainer.id);
+                      }
+                    }}
+                    className="button is-small is-danger my-2 ml-2"
+                  >
+                    Delete
+                  </button>
                 </td>
               </tr>
             );

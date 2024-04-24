@@ -1,9 +1,9 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../Layout";
 import axios from "axios";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-const AddCourse = () => {
+const EditCourse = () => {
   const [name, setName] = useState("");
   const [trainerId, setTrainerId] = useState(1);
   const [desc, setDesc] = useState("");
@@ -11,38 +11,51 @@ const AddCourse = () => {
   const [preview, setPreview] = useState("");
   const navigate = useNavigate();
 
+  let { id } = useParams();
+
   const loadImage = (e) => {
     const image = e.target.files[0];
     setFile(image);
     setPreview(URL.createObjectURL(image));
   };
 
-  const saveCourse = async (e) => {
-    e.preventDefault();
-    try {
-      await axios.post("https://api.sukmax.my.id/course", {
-        name: name,
-        trainer_id: trainerId,
-        desc: desc,
-        file: file,
-      }, {
-        headers : {
-          "Content-Type" : "multipart/form-data",
-        }
-      }
-    );
-    // redirect
-    navigate("/table-course")
-    } catch (error) {
-      console.log(error);
-    }
+  const getCourseById = async () => {
+    const response = await axios.get(`https://api.sukmax.my.id/course/${id}`);
+    setName(response.data.name);
+    setDesc(response.data.desc);
+    setFile(response.data.url);
+  };
+
+  useEffect(() => {
+    getCourseById();
+  },[]);
+
+  const updateCourse = async (e) => {
+    // e.preventDefault();
+    // try {
+    //   await axios.post("https://api.sukmax.my.id/course", {
+    //     name: name,
+    //     trainer_id: trainerId,
+    //     desc: desc,
+    //     file: file,
+    //   }, {
+    //     headers : {
+    //       "Content-Type" : "multipart/form-data",
+    //     }
+    //   }
+    // );
+    // // redirect
+    // navigate("/table-course")
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
 
   return (
     <Layout>
       <h2 className="title is-black">Course</h2>
-      <h3 className="subtitle">Add New Course</h3>
-      <form onSubmit={saveCourse}>
+      <h3 className="subtitle">Update Course</h3>
+      <form onSubmit={updateCourse}>
         <div class="field">
           <label class="label is-dark" className="is-black is-bold">
             Name
@@ -51,6 +64,7 @@ const AddCourse = () => {
             <input
               class="input"
               type="text"
+              value={name}
               placeholder="Masukkan Nama Course"
               onChange={(e) => setName(e.target.value)}
             />
@@ -65,6 +79,7 @@ const AddCourse = () => {
             <input
               class="input"
               type="text"
+              value={trainerId}
               placeholder="Text input"
               onChange={(e) => setTrainerId(e.target.value)}
             />
@@ -79,6 +94,7 @@ const AddCourse = () => {
             <textarea
               class="input"
               type="text"
+              value={desc}
               placeholder="Text input"
               onChange={(e) => setDesc(e.target.value)}
             ></textarea>
@@ -104,7 +120,7 @@ const AddCourse = () => {
 
         {preview ? (
           <figure className="image is-128x128">
-            <img src={preview} alt=""/>
+            <img src={file} alt=""/>
           </figure>
         ) : (
           ""
@@ -115,10 +131,9 @@ const AddCourse = () => {
             <button type="submit" class="button is-link">Submit</button>
           </div>
           <div class="control">
-            <Link to={"/table-course"} className="button is-link is-light">
+          <Link to={"/table-course"} className="button is-link is-light">
             Cancel
             </Link>
-            {/* <button class="button is-link is-light"></button> */}
           </div>
         </div>
       </form>
@@ -126,4 +141,4 @@ const AddCourse = () => {
   );
 }
 
-export default AddCourse;
+export default EditCourse;
